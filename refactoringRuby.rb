@@ -22,12 +22,8 @@ end
 
 command_names = ["noun", "verb", "adjective", "adverb", "gerund"]
 
-puts "Enter a command: " +
-                 command_names[0] + ' ' +
-                 command_names[1] + ' ' +
-                 command_names[2] + ' ' +
-                 command_names[3] + ' ' +
-                 command_names[4]
+puts "Enter a command: #{command_names.join(" ")}"
+
 selection = gets.chomp
 
 if selection == command_names[0]
