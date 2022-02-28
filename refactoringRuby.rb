@@ -1,39 +1,53 @@
 # Zachary Bochanski
 
-def noun
-  2.times { puts "Noun: Cadillac" }
+class Invoker
+  
+  def invoke=(command)
+    @command = command
+  end
+
+  def do
+    @command.execute
+  end
 end
 
-def verb
-  2.times { puts "Verb: Accelerate" }
+class Command
+  
+  def initialize(task, information)
+    @task = task
+    @information = information
+  end
+
+  def execute
+    @information[@task].print_result
+  end
+
 end
 
-def adjective
-  3.times { puts "Adjective: Dark" }
-end
+class Word
 
-def adverb
-  2.times { puts "Adverb: Confidently" }
-end
+  def initialize(count, message)
+    @count = count
+    @message = message
+  end
 
-def gerund
-  4.times { puts "Gerund: Grooving" }
+  def print_result
+    @count.times { puts @message }
+  end
+
 end
 
 command_names = ["noun", "verb", "adjective", "adverb", "gerund"]
-
 puts "Enter a command: #{command_names.join(" ")}"
-
 selection = gets.chomp
 
-if selection == command_names[0]
-  noun
-elsif selection == command_names[1]
-  verb
-elsif selection == command_names[2]
-  adjective
-elsif selection == command_names[3]
-  adverb
-elsif selection == command_names[4]
-  gerund
-end
+grammer = { "noun" => Word.new(2, "Noun: Cadillac"),
+            "verb" => Word.new(2, "Verb: Accelerate"),
+            "adjective" => Word.new(3, "Adjective: Dark"),
+            "adverb" => Word.new(2, "Adverb: Confidently"),
+            "gerund" => Word.new(4, "Gerund: Grooving"),
+          }
+
+invoker = Invoker.new
+invoker.invoke = Command.new(selection, grammer)
+invoker.do
